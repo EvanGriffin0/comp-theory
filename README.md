@@ -42,6 +42,21 @@ The notebook:
 This confirms that the constants used in SHA-256 are deterministically derived from
 well-defined mathematical properties rather than chosen arbitrarily.
 
+## 📘 Problem 3 — Padding (Block Parsing)
+
+This problem implements the message padding and block parsing stage of the SHA-256
+algorithm, as specified in NIST FIPS 180-4 (§5.1.1 and §5.2.1).
+
+A generator function `block_parse(msg)` is used to process an input message into
+512-bit (64-byte) blocks by:
+
+- Appending a single `1` bit (represented as `0x80`).
+- Padding with `0` bits until the message length is congruent to 56 modulo 64.
+- Appending the original message length as a 64-bit big-endian integer (in bits).
+
+The notebook includes tests covering key boundary cases (empty input, 55-byte,
+56-byte, and 64-byte messages) to verify correct padding behaviour and block output.
+A formatted hexadecimal dump is also provided to visually inspect padded blocks.
 
 ## How to Run the Notebook (GitHub Codespaces)
 
