@@ -58,6 +58,24 @@ The notebook includes tests covering key boundary cases (empty input, 55-byte,
 56-byte, and 64-byte messages) to verify correct padding behaviour and block output.
 A formatted hexadecimal dump is also provided to visually inspect padded blocks.
 
+## 📘 Problem 4 — Hashes (SHA-256 Compression Function)
+
+This problem implements the SHA-256 compression function as specified in
+NIST FIPS 180-4 (§6.2.2). Given the current intermediate hash state and a
+512-bit message block, the function computes the next hash state.
+
+The implementation:
+
+- Constructs the 64-entry message schedule from each 512-bit block.
+- Executes the 64-round SHA-256 compression loop using the standard logical
+  functions (`Ch`, `Maj`, `Σ0`, `Σ1`) and round constants.
+- Updates the intermediate hash state using 32-bit unsigned arithmetic.
+
+The compression function is validated end-to-end by combining it with the
+padding and block parsing logic from Problem 3 and comparing the resulting
+digests against Python’s `hashlib.sha256` for multiple known test vectors.
+ 
+
 ## How to Run the Notebook (GitHub Codespaces)
 
 This repository is designed to be run directly inside GitHub Codespaces, ensuring reproducibility and simplifying setup.
