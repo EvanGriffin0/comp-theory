@@ -27,12 +27,20 @@ The notebook includes:
 
 ## 📘 Problem 2 — Fractional Parts of Cube Roots
 
-Reproduces the 64 SHA-256 round constants from the fractional parts of the cube roots of the first 64 primes (FIPS 180-4 p.11):
+This problem reproduces the derivation of the 64 SHA-256 round constants defined in
+NIST FIPS 180-4 (page 11). The constants are generated from the fractional parts of the
+cube roots of the first 64 prime numbers.
 
-- Generates the first 64 primes with a simple trial-division helper.
-- Computes cube roots, takes fractional parts, scales by $2^{32}$, and casts to `np.uint32`.
-- Formats as eight-character hex values and verifies against the published constants.
-- Prints the first and last eight constants for a quick visual check.
+The notebook:
+
+- Generates the first 64 prime numbers using a simple trial-division algorithm.
+- Computes cube roots, extracts the fractional parts, and scales them by \(2^{32}\).
+- Casts the results to `np.uint32` and formats them as eight-character hexadecimal values.
+- Verifies programmatically that all computed constants exactly match those published
+  in the Secure Hash Standard.
+
+This confirms that the constants used in SHA-256 are deterministically derived from
+well-defined mathematical properties rather than chosen arbitrarily.
 
 
 ## How to Run the Notebook (GitHub Codespaces)
