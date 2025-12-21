@@ -75,6 +75,18 @@ The compression function is validated end-to-end by combining it with the
 padding and block parsing logic from Problem 3 and comparing the resulting
 digests against Python’s `hashlib.sha256` for multiple known test vectors.
  
+## 📘 Problem 5 — Passwords (Dictionary Attack)
+
+This problem demonstrates a dictionary attack against unsalted, single-round SHA-256
+password hashes. Candidate passwords are UTF-8 encoded, hashed, and compared against
+the target digests.
+
+Using a small reproducible wordlist and common variants, one hash was recovered:
+
+- `5e884898...d1542d8` → `password`
+
+The notebook discusses why SHA-256 is unsuitable for password storage and recommends
+defences such as unique salts and slow password hashing algorithms (Argon2id/bcrypt/scrypt).
 
 ## How to Run the Notebook (GitHub Codespaces)
 
@@ -87,5 +99,5 @@ This repository is designed to be run directly inside GitHub Codespaces, ensurin
 3. Select Create a Codespace on main.
 4. Once the Codespace loads, open `.vscode/problems.ipynb`.
 5. Run the notebook cells in order.
-6. Problem 2 includes an assertion that all 64 constants match the Secure Hash Standard; the cell prints a short preview and success message.
+
 
