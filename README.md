@@ -88,6 +88,69 @@ Using a small reproducible wordlist and common variants, one hash was recovered:
 The notebook discusses why SHA-256 is unsuitable for password storage and recommends
 defences such as unique salts and slow password hashing algorithms (Argon2id/bcrypt/scrypt).
 
+
+## Research Context and Related Work
+
+This project is grounded in established cryptographic standards and security best practices.
+The implementation and analysis are informed by authoritative specifications and widely accepted industry guidance, ensuring correctness, reproducibility, and relevance to real-world software engineering.
+
+### Secure Hash Standard (SHA-256)
+
+The SHA-256 algorithm implemented throughout this repository follows the specification defined in the National Institute of Standards and Technology Secure Hash Standard (FIPS 180-4).
+
+The project reproduces multiple components described in the standard, including:
+
+- 32-bit logical word operations (Ch, Maj, Σ0, Σ1, σ0, σ1)
+
+- Generation of round constants from fractional cube roots of prime numbers
+
+- Message padding and block parsing rules
+
+- The SHA-256 compression function (§6.2.2)
+
+All derived constants and final hash outputs are validated against the official values published by NIST, ensuring full compliance with the standard.
+
+### Reference Implementations
+
+To validate correctness, the custom SHA-256 implementation is compared against Python’s standard library reference implementation provided by Python Software Foundation via the hashlib module.
+
+Matching outputs across multiple test vectors confirm that the algorithm behaves identically to a widely used, production-grade implementation, reinforcing confidence in correctness.
+
+### Password Hashing and Security Best Practices
+
+Problem 5 demonstrates a dictionary attack against unsalted, single-round SHA-256 password hashes.
+This approach reflects well-documented weaknesses in using fast cryptographic hash functions for password storage.
+
+Modern security guidance from the OWASP highlights that general-purpose hash functions such as SHA-256 are unsuitable for password storage due to their speed and vulnerability to offline attacks.
+
+Industry-recommended defences include:
+
+- Unique per-user salts to prevent precomputation attacks
+
+- Memory-hard, deliberately slow password hashing algorithms such as Argon2id, bcrypt, or scrypt
+
+The project’s analysis aligns with these recommendations and explains why the demonstrated attack succeeds against weak hashing schemes but would be ineffective against modern password storage mechanisms.
+
+
+## References
+
+1. National Institute of Standards and Technology
+Secure Hash Standard (FIPS 180-4)
+https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf
+
+2. Python Software Foundation
+hashlib — Secure hashes and message digests
+https://docs.python.org/3/library/hashlib.html
+
+3. OWASP
+Password Storage Cheat Sheet
+https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html
+
+4. Internet Engineering Task Force
+RFC 9106 — Argon2 Memory-Hard Function for Password Hashing
+https://www.rfc-editor.org/rfc/rfc9106.html
+
+
 ## How to Run the Notebook (GitHub Codespaces)
 
 This repository is designed to be run directly inside GitHub Codespaces, ensuring reproducibility and simplifying setup.
